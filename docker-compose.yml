@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  backend:
+    container_name: image_analyser
+    build:
+      context: ./project/
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+#     networks:
+#       - app_net
+
+# networks:
+#   app_net:
+#     driver: bridge
+

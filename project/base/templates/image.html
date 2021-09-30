@@ -1,0 +1,111 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="justify-content-center row p-3">
+  <div class="col-md-6 my-3">
+    <div class="card mb-3">
+      <div class="card-header col d-flex justify-content-between align-items-center">
+        <h4>{{image.title}}</h4>
+        <span class="badge bg-primary p-2">{{image.fileExtention}}</span>
+      </div>
+      <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+        <img src='/media/{{image.image}}' alt="connect" style="max-width:90%;">
+      </div>
+      <div class="card-body row">
+        <div class="col-md-6">
+          <button type="button" id="analysisModalButton" class="btn btn-primary p-3" style="width: 100%;" data-toggle="modal" data-target="#exampleModalCenter">
+            Criar análise
+          </button>
+        </div>
+        <div class="col-md-6">
+          <a href="#">
+            <button type="button" class="btn btn-outline-danger p-3" style="width: 100%;">
+              Apagar imagem
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        Registro criado em {{image.created_at}}
+      </div>
+    </div>
+  </div>
+  
+  <h4 class="py-3">Análises</h4>
+  <hr>
+  <div class="row py-3">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table class="table table-bordered table-striped mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Analisado?</th>
+            <th scope="col">Apagar?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for analysis in analyses %}
+            <tr>
+              <th><a href="{% url 'base:index' %}">{{ analysis.nome }}</a></th>
+              <td>{{ analysis.tipo }}</td>
+              <td>{{ analysis.status }}</td>
+              <td>
+                <button type="button" class="btn btn-danger" onclick="">&#128465;</button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="analysisModal" tabindex="-1" role="dialog" aria-labelledby="analysisModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nova análise</h5>
+        <button type="button" class="btn btn-danger analysisModalCloseButton" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <!-- enctype="multipart/form-data" -->
+        <form action="{% url 'base:create-analysis' image.pk %}" method="post">
+            {% csrf_token %}
+            <div class="form-group row mb-0">
+              {{ form.nome|as_crispy_field }}
+            </div>
+            <div class="form-group row mb-0">
+              {{ form.tipo|as_crispy_field }}
+            </div>
+            <div class="form-group row mb-3">
+              {{ form.status|as_crispy_field }}
+            </div>
+            <button type="submit" class="btn btn-primary">Criar análise</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("#analysisModalButton").click(function(){
+        $("#analysisModal").modal('show');
+    });
+  });
+
+  $(document).ready(function(){
+    $(".analysisModalCloseButton").click(function(){
+        $("#analysisModal").modal('hide');
+    });
+  });
+</script>
+{% endblock content %}
+
+
