@@ -8,7 +8,7 @@
         <div class="card-header"><h4>Atualização de análise</h4></div>
         <div class="card-body">
             
-            <form action="{% url 'base:update-analysis' aid=aid %}" method="post">
+            <form action="{% url 'base:update-analysis' aid=aid iid=iid %}" method="post">
                 {% csrf_token %}
                 <div class="form-group row my-3">
                     {{ form.nome|as_crispy_field }}

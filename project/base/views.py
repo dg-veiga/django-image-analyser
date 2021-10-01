@@ -209,7 +209,9 @@ def update_analysis(request, aid, iid):
         form = AnalysisForm(instance=analysis)
 
         context = {
-            'form': form
+            'form': form,
+            'aid': aid,
+            'iid': iid,
         }
 
         return render(request, 'analysis.html', context)
