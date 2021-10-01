@@ -3,11 +3,25 @@
 
 ## Imagens
 
-![Home](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/index-page.jpg)
-![Upload](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/upload-page.jpg)
-![Imagem](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/image-page.jpg)
-![Modal de análise](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/analysis-modal.jpg)
-![Modal de exclusão](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/delete-image-modal.jpg)
+<p align="center">
+  <img src="https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/index-page.jpg" width="90%" title="Home page">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/upload-page.jpg" width="90%" title="Upload">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/image-page.jpg" width="90%" title="Imagem">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/analysis-modal.jpg" width="90%" title="Modal de análise">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/delete-image-modal.jpg" width="90%" title="Modal de exclusão">
+</p>
 
 ## Download e instalação
 ```bash
