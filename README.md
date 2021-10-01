@@ -1,23 +1,13 @@
-<<<<<<< HEAD
 
-
-git clone https://github.com/dg-veiga/django-image-analyser
-
-cd django-image-analyser
-
-Tendo o docker-compose instalado na sua instância, basta executar o comando 
-
-$ sudo docker-compose up --build 
-
-para instalar, e 
-
-$ sudo docker-compose up
-
-=======
 # App de Gestão de Imagens
 
 ## Imagens
 
+![Home](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/index-page.jpg)
+![Upload](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/upload-page.jpg)
+![Imagem](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/image-page.jpg)
+![Modal de análise](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/analysis-modal.jpg)
+![Modal de exclusão](https://github.com/dg-veiga/django-image-analyser/blob/master/readme-images/delete-image-modal.jpg)
 
 ## Download e instalação
 ```bash
@@ -85,4 +75,4 @@ path('api/analyses/', analyses_list_api, name="analyses-list-api"),
 ## Trabalhos futuros
 - [ ] Construção de testes unitários.
 - [ ] Filtrar as tags de datetime para 'Y-m-d H:i'
->>>>>>> 96c8b21cbaed086eb71e4f9c7db8324f8fb77026
+- [ ] Melhorar população do banco de dados de amostra
