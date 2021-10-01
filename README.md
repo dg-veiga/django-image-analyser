@@ -1,5 +1,9 @@
 # App de Gestão de Imagens
 
+## Imagens
+
+
+## Download e instalação
 ```bash
 $ git clone https://github.com/dg-veiga/django-image-analyser
 $ cd django-image-analyser
@@ -14,6 +18,8 @@ E para executar depois de instalado:
 ```bash
 $ sudo docker-compose up
 ```
+
+Com isso o aplicativo irá rodar automaticamente no localhost:8000.
 
 ## Views e endpoints da API
 ```python
@@ -62,3 +68,4 @@ path('api/analyses/', analyses_list_api, name="analyses-list-api"),
 
 ## Trabalhos futuros
 - [ ] Construção de testes unitários.
+- [ ] Filtrar as tags de datetime para 'Y-m-d H:i'
