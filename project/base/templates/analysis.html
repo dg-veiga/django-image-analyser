@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center p-3">
+    <div class="card border-primary mb-3" style="width: auto;">
+        <div class="card-header"><h4>Atualização de análise</h4></div>
+        <div class="card-body">
+            
+            <form action="{% url 'base:update-analysis' aid=aid %}" method="post">
+                {% csrf_token %}
+                <div class="form-group row my-3">
+                    {{ form.nome|as_crispy_field }}
+                </div>
+                <div class="form-group row my-3">
+                  {{ form.tipo|as_crispy_field }}
+                </div>
+                <div class="form-group row my-3">
+                  {{ form.status|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

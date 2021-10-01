@@ -142,7 +142,7 @@ def upload_image(request):
 
 def get_image(request, pk):
     image = Image.objects.get(pk=pk)
-    # serializer = ImageSerializer(image, many=False)
+    image_serialized = ImageSerializer(image, many=False)
 
     form = AnalysisForm(request.POST)
 
@@ -150,7 +150,7 @@ def get_image(request, pk):
     analyses_serialized = AnalisysSerializer(analyses, many=True)
 
     context = {
-        'image': image,
+        'image': image_serialized.data,
         'analyses': analyses_serialized.data,
         'form': form
     }
@@ -162,8 +162,11 @@ def create_analysis(request, pk):
     if request.method == 'POST':
         form = AnalysisForm(request.POST)
 
-        status = form.data['status'] == 'true'
-
+        try:
+            status = form.data['status'] == 'on'
+        except:
+            status = False
+    
         new_analysis = Analysis.objects.create(
             nome = form.data['nome'],
             tipo = form.data['tipo'],
@@ -174,3 +177,46 @@ def create_analysis(request, pk):
         new_analysis.save()
 
         return redirect('/image/' + str(pk) + '/')
+
+def delete_analysis(request, aid, iid):
+    
+    analysis = Analysis.objects.get(pk=aid)
+    analysis.delete()
+    
+    return redirect('/image/' + str(iid) + '/')
+
+def update_analysis(request, aid, iid):
+    
+    analysis = Analysis.objects.get(pk=aid)
+    image = Image.objects.get(pk=iid)
+
+    if request.method == 'POST' and analysis is not None:
+        form = AnalysisForm(request.POST, instance=analysis)
+
+        try:
+            status = form.data['status'] == 'on'
+        except:
+            status = False
+    
+        analysis.nome = form.data['nome']
+        analysis.tipo = form.data['tipo']
+        analysis.status = status
+        analysis.save()
+
+        return redirect('/image/' + str(iid) + '/')
+
+    else:
+        form = AnalysisForm(instance=analysis)
+
+        context = {
+            'form': form
+        }
+
+        return render(request, 'analysis.html', context)
+
+def delete_image(request, pk):
+    
+    image = Image.objects.get(pk=pk)
+    image.delete()
+
+    return redirect('/')

@@ -11,20 +11,18 @@
         <span class="badge bg-primary p-2">{{image.fileExtention}}</span>
       </div>
       <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-        <img src='/media/{{image.image}}' alt="connect" style="max-width:90%;">
+        <img src='{{image.image}}' alt="connect" style="max-width:90%;">
       </div>
       <div class="card-body row">
         <div class="col-md-6">
-          <button type="button" id="analysisModalButton" class="btn btn-primary p-3" style="width: 100%;" data-toggle="modal" data-target="#exampleModalCenter">
+          <button type="button" id="analysisModalButton" class="btn btn-outline-primary p-3" style="width: 100%;" data-toggle="modal" data-target="#exampleModalCenter">
             Criar análise
           </button>
         </div>
         <div class="col-md-6">
-          <a href="#">
-            <button type="button" class="btn btn-outline-danger p-3" style="width: 100%;">
-              Apagar imagem
-            </button>
-          </a>
+          <button type="button" id="deleteImageModalButton" class="btn btn-outline-danger p-3" style="width: 100%;" data-toggle="modal" data-target="#exampleModalCenter">
+            Apagar imagem
+          </button>
         </div>
       </div>
       <div class="card-footer text-muted">
@@ -43,17 +41,23 @@
             <th scope="col">Nome</th>
             <th scope="col">Tipo</th>
             <th scope="col">Analisado?</th>
+            <th scope="col">Data de criação</th>
+            <th scope="col">Data de modificação</th>
             <th scope="col">Apagar?</th>
           </tr>
         </thead>
         <tbody>
           {% for analysis in analyses %}
             <tr>
-              <th><a href="{% url 'base:index' %}">{{ analysis.nome }}</a></th>
+              <th><a href="{% url 'base:update-analysis' aid=analysis.id iid=image.pk %}">{{ analysis.nome }}</a></th>
               <td>{{ analysis.tipo }}</td>
               <td>{{ analysis.status }}</td>
+              <td>{{ analysis.created_at }}</td>
+              <td>{{ analysis.updated_at }}</td>
               <td>
-                <button type="button" class="btn btn-danger" onclick="">&#128465;</button>
+                <a href="{% url 'base:delete-analysis' aid=analysis.id iid=image.pk %}">
+                  <button type="button" class="btn btn-danger">&#128465;</button>
+                </a>
               </td>
             </tr>
           {% endfor %}
@@ -63,7 +67,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal de análise -->
 <div class="modal fade" id="analysisModal" tabindex="-1" role="dialog" aria-labelledby="analysisModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -93,6 +97,26 @@
     </div>
   </div>
 </div>
+
+<!-- Modal de análise -->
+<div class="modal fade" id="deleteImageModal" tabindex="-1" role="dialog" aria-labelledby="deleteImageModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Deseja deletar a imagem "{{image.title}}"</h5>
+        <button type="button" class="btn btn-danger deleteImageModalCloseButton" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a href="{% url 'base:delete-image' image.pk %}">
+          <button type="button" class="btn btn-outline-danger">Confirmar exclusão</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   $(document).ready(function(){
     $("#analysisModalButton").click(function(){
@@ -103,6 +127,18 @@
   $(document).ready(function(){
     $(".analysisModalCloseButton").click(function(){
         $("#analysisModal").modal('hide');
+    });
+  });
+
+  $(document).ready(function(){
+    $("#deleteImageModalButton").click(function(){
+        $("#deleteImageModal").modal('show');
+    });
+  });
+
+  $(document).ready(function(){
+    $(".deleteImageModalCloseButton").click(function(){
+        $("#deleteImageModal").modal('hide');
     });
   });
 </script>

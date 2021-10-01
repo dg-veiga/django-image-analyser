@@ -19,3 +19,5 @@ class AnalisysSerializer(serializers.ModelSerializer):
     class Meta:
         model = Analysis
         fields = '__all__'
+
+    

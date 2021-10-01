@@ -16,6 +16,12 @@ urlpatterns = [
 
     path('image/<str:pk>/create-analysis/', create_analysis, name='create-analysis'),
 
+    path('api/delete-analysis/<int:aid>/<int:iid>/', delete_analysis, name="delete-analysis"),
+
+    path('api/update-analysis/<int:aid>/<int:iid>/', update_analysis, name="update-analysis"),
+
+    path('api/delete-image/<int:pk>/', delete_image, name="delete-image"),
+
     ### ===> URLS da API <===
     ## ====================================================================
     # lista todas as imagens
